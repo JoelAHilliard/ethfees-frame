@@ -1,10 +1,9 @@
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const fetch = require('node-fetch'); // Assuming Node.js environment, need a fetch polyfill
+// const fs = require('fs');
+// const path = require('path');
 const { getFrameMessage } = require('@coinbase/onchainkit');
-const satori = require('satori');
-const sanitizeHtml = require('sanitize-html');
+// const satori = require('satori');
+// const sanitizeHtml = require('sanitize-html');
 const sharp = require('sharp');
 
 const app = express();
