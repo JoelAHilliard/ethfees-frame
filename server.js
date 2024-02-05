@@ -25,7 +25,7 @@ app.use(express.static('public'));
 
 app.get('/png', async (req, res) => {
     // Extract dynamic data from query parameters
-    const message = 'Hello, World!';
+    const message = req.query.message || 'Hello, World!'; // Default message if none provided
     const robotoArrayBuffer = await loadFontData('Roboto-Regular.ttf');
 
     const options ={
@@ -45,29 +45,12 @@ app.get('/png', async (req, res) => {
         {
           type: 'div',
           props: {
-            children: 'hello, world',
+            children: message,
             style: { color: 'black' },
           },
         },
         options
       )
-    // Manually construct an SVG string
-    const svgData = `
-        <svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
-            <style>
-                @font-face {
-                    font-family: 'MyCustomFont';
-                    src: url('opensans.ttf');
-                }
-                .custom-text {
-                    font-family: 'MyCustomFont', sans-serif;
-                    font-size: 24px;
-                }
-            </style>
-            <rect width="100%" height="100%" fill="green"/>
-            <text x="10" y="50" class="custom-text">Hello, SVG with Custom Font!</text>
-        </svg>
-    `;
 
     try {
         // Convert SVG string to PNG buffer using sharp
@@ -95,8 +78,9 @@ app.post('/hello', async (req, res) => {
     });
 
     if (isValid) {
+        let address = message.interactor.verified_accounts[0];
         // Dynamically construct the SVG URL with query parameters as needed
-        const dynamicMessage = encodeURIComponent("Your Dynamic Message Here");
+        const dynamicMessage = encodeURIComponent(address);
         const svgHttpUrl = `https://${req.get('host')}/dynamic-svg?message=${dynamicMessage}`;
         console.log(svgHttpUrl)
         // Return the HTTP link to the dynamically generated SVG in your response
