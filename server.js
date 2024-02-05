@@ -26,7 +26,7 @@ app.use(express.static('public'));
 app.get('/png', async (req, res) => {
     // Extract dynamic data from query parameters
     const message = 'Hello, World!';
-    const robotoArrayBuffer = await loadFontData('opensans.ttf');
+    const robotoArrayBuffer = await loadFontData('Roboto-Regular.ttf');
 
     const options ={
         height:600,
