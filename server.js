@@ -100,9 +100,9 @@ app.get('/png', async (req, res) => {
                     justifyContent: 'center',
                     alignItems: 'center',
                     height: '100%', // Use 100% of the container height
-                    color: 'black',
+                    color: 'white',
                     fontFamily: 'Roboto', // Make sure to match the font family name
-                    fontSize: '24px', // Adjust the font size as needed
+                    fontSize: '40px', // Adjust the font size as needed
                   },
                 },
               },
@@ -110,7 +110,7 @@ app.get('/png', async (req, res) => {
             style: {
               width: '100%', // Use 100% of the width
               height: '100%', // Use 100% of the height
-              backgroundColor: 'white', // Set the background color to white
+              background: 'linear-gradient(to bottom, #0f172a, #3b0764)', // Set the background to a gradient from purple to black
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
