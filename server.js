@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static('public'));
 
-app.get('/dynamic-svg', async (req, res) => {
+app.get('/png', async (req, res) => {
     // Extract dynamic data from query parameters
     const message = 'Hello, World!';
    
@@ -58,8 +58,8 @@ app.post('/hello', async (req, res) => {
             <html>
                 <head>
                     <meta property="fc:frame" content="vNext" />
-                    <meta property="fc:frame:image" content="https://ethfees-frame-production.up.railway.app/dynamic-svg?message=Your%20Dynamic%20Message%20Here" />
-                    <meta property="og:image" content="https://ethfees-frame-production.up.railway.app/dynamic-svg?message=Your%20Dynamic%20Message%20Here" />
+                    <meta property="fc:frame:image" content="https://ethfees-frame-production.up.railway.app/png?message=Your%20Dynamic%20Message%20Here" />
+                    <meta property="og:image" content="https://ethfees-frame-production.up.railway.app/png?message=Your%20Dynamic%20Message%20Here" />
                 </head>
                 <body>
                 </body>
