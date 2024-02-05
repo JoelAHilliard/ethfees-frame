@@ -1,13 +1,22 @@
 import express from 'express';
 // If you were using fs and path, here's how you'd import them in ES Module syntax, but since they're commented out, I'll leave them as a note.
-// import fs from 'fs/promises';
+import fs from 'fs/promises';
 // import path from 'path';
 import { getFrameMessage } from '@coinbase/onchainkit';
 import satori from 'satori';
 // import sanitizeHtml from 'sanitize-html'; // Assuming you might need it later based on your commented code.
 import sharp from 'sharp';
 
-
+async function loadFontData(fontPath) {
+    try {
+      const fontBuffer = await fs.readFile(fontPath);
+      return fontBuffer;
+    } catch (error) {
+      console.error('Error reading font file:', error);
+      throw error; // Rethrow or handle as needed
+    }
+  }
+  
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -17,9 +26,20 @@ app.use(express.static('public'));
 app.get('/png', async (req, res) => {
     // Extract dynamic data from query parameters
     const message = 'Hello, World!';
+    const robotoArrayBuffer = await loadFontData('opensans.ttf');
+
     const options ={
         height:600,
-        width:900
+        width:900,
+        fonts: [
+            {
+              name: 'Roboto',
+              // Use `fs` (Node.js only) or `fetch` to read the font as Buffer/ArrayBuffer and provide `data` here.
+              data: robotoArrayBuffer,
+              weight: 400,
+              style: 'normal',
+            },
+          ],
     }
     let svg_test = await satori(
         {
