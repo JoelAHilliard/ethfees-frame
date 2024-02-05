@@ -19,15 +19,25 @@ app.get('/png', async (req, res) => {
     // Manually construct an SVG string
     const svgData = `
         <svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+            <style>
+                @font-face {
+                    font-family: 'MyCustomFont';
+                    src: url('opensans.ttf');
+                }
+                .custom-text {
+                    font-family: 'MyCustomFont', sans-serif;
+                    font-size: 24px;
+                }
+            </style>
             <rect width="100%" height="100%" fill="green"/>
-            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="30">Hello, SVG!</text>
+            <text x="10" y="50" class="custom-text">Hello, SVG with Custom Font!</text>
         </svg>
     `;
 
     try {
         // Convert SVG string to PNG buffer using sharp
         const pngBuffer = await sharp(Buffer.from(svgData))
-                                .resize(1200) // Resize if needed, though this might distort the image if the aspect ratio changes
+                                .resize(800) // Resize if needed, though this might distort the image if the aspect ratio changes
                                 .toFormat("png")
                                 .toBuffer();
 
