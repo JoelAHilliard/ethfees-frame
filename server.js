@@ -53,21 +53,10 @@ app.get('/png', async (req, res) => {
         options
       )
       const svgData = `
-      <svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
-          <style>
-              @font-face {
-                  font-family: 'MyCustomFont';
-                  src: url('opensans.ttf');
-              }
-              .custom-text {
-                  font-family: 'MyCustomFont', sans-serif;
-                  font-size: 24px;
-              }
-          </style>
-          <rect width="100%" height="100%" fill="green"/>
-          <text x="10" y="50" class="custom-text">Hello, SVG with Custom Font!</text>
-      </svg>
-                      `;
+        <svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100%" height="100%" fill="red"/>
+        </svg>
+    `;
     try {
         // Convert SVG string to PNG buffer using sharp
         const pngBuffer = await sharp(Buffer.from(svgData))
