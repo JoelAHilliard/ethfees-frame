@@ -2,7 +2,7 @@ const express = require('express');
 // const fs = require('fs');
 // const path = require('path');
 const { getFrameMessage } = require('@coinbase/onchainkit');
-// const satori = require('satori');
+const satori = require('satori');
 // const sanitizeHtml = require('sanitize-html');
 const sharp = require('sharp');
 
@@ -15,7 +15,20 @@ app.use(express.static('public'));
 app.get('/png', async (req, res) => {
     // Extract dynamic data from query parameters
     const message = 'Hello, World!';
-   
+    const options ={
+        height:600,
+        width:900
+    }
+    let svg_test = await satori(
+        {
+          type: 'div',
+          props: {
+            children: 'hello, world',
+            style: { color: 'black' },
+          },
+        },
+        options
+      )
     // Manually construct an SVG string
     const svgData = `
         <svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +49,7 @@ app.get('/png', async (req, res) => {
 
     try {
         // Convert SVG string to PNG buffer using sharp
-        const pngBuffer = await sharp(Buffer.from(svgData))
+        const pngBuffer = await sharp(Buffer.from(svg_test))
                                 .resize(800) // Resize if needed, though this might distort the image if the aspect ratio changes
                                 .toFormat("png")
                                 .toBuffer();
