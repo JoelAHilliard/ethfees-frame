@@ -81,15 +81,15 @@ app.post('/hello', async (req, res) => {
         let address = message.interactor.verified_accounts[0];
         // Dynamically construct the SVG URL with query parameters as needed
         const dynamicMessage = encodeURIComponent(address);
-        const svgHttpUrl = `https://${req.get('host')}/dynamic-svg?message=${dynamicMessage}`;
+        const svgHttpUrl = `https://${req.get('host')}/png?message=${dynamicMessage}`;
         console.log(svgHttpUrl)
         // Return the HTTP link to the dynamically generated SVG in your response
         res.status(200).send(`
             <html>
                 <head>
                     <meta property="fc:frame" content="vNext" />
-                    <meta property="fc:frame:image" content="https://ethfees-frame-production.up.railway.app/png?message=Hello" />
-                    <meta property="og:image" content="https://ethfees-frame-production.up.railway.app/png?message=Hello" />
+                    <meta property="fc:frame:image" content=${svgHttpUrl} />
+                    <meta property="og:image" content=${svgHttpUrl} />
                 </head>
                 <body>
                 </body>
