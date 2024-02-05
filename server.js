@@ -70,7 +70,7 @@ app.get('/png', async (req, res) => {
                       `;
     try {
         // Convert SVG string to PNG buffer using sharp
-        const pngBuffer = await sharp(Buffer.from(svgData))
+        const pngBuffer = await sharp(Buffer.from(svg_test))
                                 .resize(800) // Resize if needed, though this might distort the image if the aspect ratio changes
                                 .toFormat("png")
                                 .toBuffer();
