@@ -19,7 +19,7 @@ app.get('/dynamic-svg', async (req, res) => {
     // Manually construct an SVG string
     const svgData = `
         <svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
-            <rect width="100%" height="100%" fill="white"/>
+            <rect width="100%" height="100%" fill="red"/>
         </svg>
     `;
 
