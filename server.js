@@ -47,7 +47,7 @@ app.get('/png', async (req, res) => {
           type: 'div',
           props: {
             children: message,
-            style: { color: 'black' },
+            style: { color: 'black', backgroundColor:"white" },
           },
         },
         options
@@ -60,7 +60,7 @@ app.get('/png', async (req, res) => {
     try {
         // Convert SVG string to PNG buffer using sharp
         const pngBuffer = await sharp(Buffer.from(svg_test))
-                                .resize(800) // Resize if needed, though this might distort the image if the aspect ratio changes
+                                .resize(1200) // Resize if needed, though this might distort the image if the aspect ratio changes
                                 .toFormat("png")
                                 .toBuffer();
 
