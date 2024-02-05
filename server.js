@@ -22,11 +22,11 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.static('public'));
+const robotoArrayBuffer = await loadFontData('Roboto-Regular.ttf');
 
 app.get('/png', async (req, res) => {
     // Extract dynamic data from query parameters
     const message = req.query.message || 'Hello, World!'; // Default message if none provided
-    const robotoArrayBuffer = await loadFontData('Roboto-Regular.ttf');
 
     const options ={
         height:600,
