@@ -59,7 +59,7 @@ app.post('/hello', async (req, res) => {
                 <head>
                     <meta property="fc:frame" content="vNext" />
                     <meta property="fc:frame:image" content="https://ethfees-frame-production.up.railway.app/dynamic-svg?message=Your%20Dynamic%20Message%20Here" />
-                    <meta property="og:image" content="${svgHttpUrl}" />
+                    <meta property="og:image" content="https://ethfees-frame-production.up.railway.app/dynamic-svg?message=Your%20Dynamic%20Message%20Here" />
                 </head>
             </html>
         `);
