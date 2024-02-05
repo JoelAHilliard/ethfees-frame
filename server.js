@@ -26,32 +26,55 @@ const robotoArrayBuffer = await loadFontData('Roboto-Regular.ttf');
 
 app.get('/png', async (req, res) => {
     // Extract dynamic data from query parameters
-    const message = req.query.message || 'Hello, World!'; // Default message if none provided
+        const message = req.query.message || 'Hello, World!'; // Default message if none provided
 
-    const options ={
-        height:600,
-        width:900,
+        const options = {
+        height: 630,
+        width: 1200,
         fonts: [
-            {
-              name: 'Roboto',
-              // Use `fs` (Node.js only) or `fetch` to read the font as Buffer/ArrayBuffer and provide `data` here.
-              data: robotoArrayBuffer,
-              weight: 400,
-              style: 'normal',
-            },
-          ],
-    }
-    
-    let svg_test = await satori(
+          {
+            name: 'Roboto',
+            data: robotoArrayBuffer, // Ensure you have the ArrayBuffer of the Roboto font
+            weight: 400,
+            style: 'normal',
+          },
+        ],
+      };
+      
+      let svg_test = await satori(
         {
           type: 'div',
           props: {
-            children: message,
-            style: { color: 'black', backgroundColor:"white" },
+            children: [
+              {
+                type: 'div',
+                props: {
+                  children: message,
+                  style: {
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100%', // Use 100% of the container height
+                    color: 'black',
+                    fontFamily: 'Roboto', // Make sure to match the font family name
+                    fontSize: '24px', // Adjust the font size as needed
+                  },
+                },
+              },
+            ],
+            style: {
+              width: '100%', // Use 100% of the width
+              height: '100%', // Use 100% of the height
+              backgroundColor: 'white', // Set the background color to white
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            },
           },
         },
         options
-      )
+      );
+      
       const svgData = `
         <svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
             <rect width="100%" height="100%" fill="red"/>
@@ -60,11 +83,7 @@ app.get('/png', async (req, res) => {
     try {
         // Convert SVG string to PNG buffer using sharp
         const pngBuffer = await sharp(Buffer.from(svg_test))
-                                .resize({
-                                    width: 1200,
-                                    height: 630,
-                                    fit: 'cover'
-                                })
+                                .resize(1200) // Resize if needed, though this might distort the image if the aspect ratio changes
                                 .toFormat("png")
                                 .toBuffer();
 
