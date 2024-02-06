@@ -7,8 +7,6 @@ import sharp from 'sharp';
 import dotenv from 'dotenv';
 dotenv.config();
 
-console.log(process.env.ETHERSCAN_API); 
-
 async function loadFontData(fontPath) {
     try {
       const fontBuffer = await fs.readFile(fontPath);
