@@ -40,6 +40,86 @@ function calculateEthSpent(transaction) {
 
   return totalCostInEth;
 }
+app.get('/startPng', async (req, res) => {
+  
+  try {
+    
+      const options = {
+        height: 630,
+        width: 1200,
+        fonts: [
+          {
+            name: 'Roboto',
+            data: robotoArrayBuffer, // Ensure you have the ArrayBuffer of the Roboto font
+            weight: 400,
+            style: 'normal',
+          },
+        ],
+        };
+      // Generate SVG content
+      let svgContent = await satori({
+        type: 'div',
+        props: {
+          children: [
+            {
+              type: 'div',
+              props: {
+                children: "How degen are you?",
+                style: {
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  color: 'white',
+                  fontFamily: 'Roboto', 
+                  fontSize: '70px',
+                  fontWeight: 'bold', // Make the text bold
+                },
+              },
+            },
+            {
+              type: 'div',
+              props: {
+                children: "Click to see gas fees spent on ETH Mainnet.",
+                style: {
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  color: 'white',
+                  fontFamily: 'Roboto', 
+                  fontSize: '40px',
+                  // The text is normal weight by default, so no need to specify unless changing
+                },
+              },
+            },
+          ],
+          style: {
+            width: '100%',
+            height: '100%',
+            background: 'linear-gradient(to bottom, #0f172a, #3b0764)',
+            display: 'flex',
+            flexDirection: 'column', // Adjust this to stack the divs vertically
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+        },
+      }, options);
+      
+
+      const pngBuffer = await sharp(Buffer.from(svgContent))
+                          .resize(1200)
+                          .toFormat("png")
+                          .toBuffer();
+
+      // Cache the generated PNG content
+      res.setHeader('Content-Type', 'image/png');
+
+      res.send(pngBuffer);
+  } catch (error) {
+      console.error('Error fetching data or generating image:', error);
+      res.status(500).send('Internal Server Error');
+  }
+});
+
 app.get('/png', async (req, res) => {
   const message = (req.query.message || 'default').toLowerCase().trim();
   const cacheKey = message.slice(0, 4) + "..." + message.slice(-4);
