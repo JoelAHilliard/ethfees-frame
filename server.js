@@ -1,16 +1,13 @@
 import express from 'express';
-// If you were using fs and path, here's how you'd import them in ES Module syntax, but since they're commented out, I'll leave them as a note.
 import fs from 'fs/promises';
-// import path from 'path';
 import fetch from 'node-fetch';
 import { getFrameMessage } from '@coinbase/onchainkit';
 import satori from 'satori';
-// import sanitizeHtml from 'sanitize-html'; // Assuming you might need it later based on your commented code.
 import sharp from 'sharp';
 import dotenv from 'dotenv';
 dotenv.config();
 
-console.log(process.env.ETHERSCAN_API); // Now it should be accessible
+console.log(process.env.ETHERSCAN_API); 
 
 async function loadFontData(fontPath) {
     try {
@@ -18,7 +15,7 @@ async function loadFontData(fontPath) {
       return fontBuffer;
     } catch (error) {
       console.error('Error reading font file:', error);
-      throw error; // Rethrow or handle as needed
+      throw error;
     }
   }
   
