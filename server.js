@@ -74,7 +74,7 @@ app.get('/png', async (req, res) => {
         fonts: [
           {
             name: 'Roboto',
-            data: robotoArrayBuffer, // Ensure you have the ArrayBuffer of the Roboto font
+            data: robotoArrayBuffer,
             weight: 400,
             style: 'normal',
           },
@@ -94,18 +94,18 @@ app.get('/png', async (req, res) => {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: '100%', // Use 100% of the container height
+                    height: '100%', 
                     color: 'white',
-                    fontFamily: 'Roboto', // Make sure to match the font family name
-                    fontSize: '40px', // Adjust the font size as needed
+                    fontFamily: 'Roboto', 
+                    fontSize: '40px',
                   },
                 },
               },
             ],
             style: {
-              width: '100%', // Use 100% of the width
-              height: '100%', // Use 100% of the height
-              background: 'linear-gradient(to bottom, #0f172a, #3b0764)', // Set the background to a gradient from purple to black
+              width: '100%',
+              height: '100%',
+              background: 'linear-gradient(to bottom, #0f172a, #3b0764)',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
